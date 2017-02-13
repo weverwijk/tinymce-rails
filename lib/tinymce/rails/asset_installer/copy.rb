@@ -41,7 +41,7 @@ module TinyMCE
             logger.info "Removing digest from #{src}"
             begin
               FileUtils.mv(src, dest, :force => true)
-            ensure
+            rescue
               logger.info "Removing digest failed from #{src}"
             end
           end
