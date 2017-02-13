@@ -27,7 +27,11 @@ module TinyMCE
         
         def copy_assets
           logger.info "Copying assets to #{File.join(target, "tinymce")}"
-          FileUtils.cp_r(assets, target, :preserve => true)
+          begin
+            FileUtils.cp_r(assets, target, :preserve => true)
+          rescue
+            logger.info "Copying assets to failed"
+          end           
         end
         
         def append_to_manifest
