@@ -39,7 +39,11 @@ module TinyMCE
         def move_asset(src, dest)
           with_asset(src, dest) do |src, dest|
             logger.info "Removing digest from #{src}"
-            FileUtils.mv(src, dest, :force => true)
+            begin
+              FileUtils.mv(src, dest, :force => true)
+            ensure
+              logger.info "Removing digest failed from #{src}"
+            end
           end
         end
       
